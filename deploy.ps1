@@ -50,7 +50,7 @@ if ($isWindows) {
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
     -s microsoft/nanoserver:sac2016 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1809" `
-    -b stefanscherer/nanoserver:10.0.17763.1
+    -b stefanscherer/nanoserver:10.0.17763.253
 
 } else {
   # Linux
