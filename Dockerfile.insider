@@ -1,16 +1,7 @@
-ARG golang=chocolateyfest/golang
-ARG target=mcr.microsoft.com/nanoserver-insider:10.0.17744.1001
+FROM stefanscherer/whoami:windows-amd64-1.8.2-1809 as bin
+FROM mcr.microsoft.com/windows/nanoserver/insider:10.0.18298.1000
 
-FROM $golang AS build
-
-COPY . /code
-WORKDIR /code
-
-RUN go build http.go
-
-FROM $target
-
-COPY --from=build /code/http.exe /http.exe
+COPY --from=bin /http.exe /http.exe
 
 EXPOSE 8080
 
