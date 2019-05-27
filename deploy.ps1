@@ -50,7 +50,15 @@ if ($isWindows) {
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
     -s microsoft/nanoserver:sac2016 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1809" `
-    -b stefanscherer/nanoserver:10.0.17763.379
+    -b stefanscherer/nanoserver:1809
+
+  Write-Host "Rebasing image to produce 1903 variant"
+  npm install -g rebase-docker-image
+  rebase-docker-image `
+    "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
+    -s microsoft/nanoserver:sac2016 `
+    -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1903" `
+    -b stefanscherer/nanoserver:1903
 
 } else {
   # Linux
@@ -63,7 +71,8 @@ if ($isWindows) {
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809"
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
     docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v6
     docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm64 --variant v8
     docker manifest push "$($image):$env:APPVEYOR_REPO_TAG_NAME"
@@ -76,7 +85,8 @@ if ($isWindows) {
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809"
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
     docker manifest annotate "$($image):latest" "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v6
     docker manifest annotate "$($image):latest" "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm64 --variant v8
     docker manifest push "$($image):latest"
