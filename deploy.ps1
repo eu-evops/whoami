@@ -31,6 +31,7 @@ docker push "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
 if ($isWindows) {
   # Windows
   Write-Host "Rebasing image to produce 2016/1607 variant"
+  npm install -g rebase-docker-image
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
     -s mcr.microsoft.com/windows/nanoserver:1809 `
@@ -38,7 +39,6 @@ if ($isWindows) {
     -b mcr.microsoft.com/windows/nanoserver:sac2016
 
   Write-Host "Rebasing image to produce 1709 variant"
-  npm install -g rebase-docker-image
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
     -s mcr.microsoft.com/windows/nanoserver:1809 `
