@@ -30,30 +30,32 @@ docker push "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
 
 if ($isWindows) {
   # Windows
+  Write-Host "Rebasing image to produce 2016/1607 variant"
+  rebase-docker-image `
+    "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
+    -s mcr.microsoft.com/windows/nanoserver:1809 `
+    -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1607" `
+    -b mcr.microsoft.com/windows/nanoserver:sac2016
+
   Write-Host "Rebasing image to produce 1709 variant"
   npm install -g rebase-docker-image
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
+    -s mcr.microsoft.com/windows/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1709" `
     -b mcr.microsoft.com/windows/nanoserver:1709
 
   Write-Host "Rebasing image to produce 1803 variant"
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
+    -s mcr.microsoft.com/windows/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1803" `
     -b mcr.microsoft.com/windows/nanoserver:1803
-
-  Write-Host "Rebasing image to produce 1809 variant"
-  rebase-docker-image `
-    "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:sac2016 `
-    -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1809" `
-    -b mcr.microsoft.com/windows/nanoserver:1809
 
   Write-Host "Rebasing image to produce 1903 variant"
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:sac2016 `
+    -s mcr.microsoft.com/windows/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1903" `
     -b mcr.microsoft.com/windows/nanoserver:1903
 
@@ -65,10 +67,10 @@ if ($isWindows) {
       "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
     docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v6
     docker manifest annotate "$($image):$env:APPVEYOR_REPO_TAG_NAME" "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm64 --variant v8
@@ -79,10 +81,10 @@ if ($isWindows) {
       "$($image):linux-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1607" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1709" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1809" `
+      "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME" `
       "$($image):windows-amd64-$env:APPVEYOR_REPO_TAG_NAME-1903"
     docker manifest annotate "$($image):latest" "$($image):linux-arm-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm --variant v6
     docker manifest annotate "$($image):latest" "$($image):linux-arm64-$env:APPVEYOR_REPO_TAG_NAME" --os linux --arch arm64 --variant v8
