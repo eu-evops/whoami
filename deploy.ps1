@@ -34,30 +34,30 @@ if ($isWindows) {
   npm install -g rebase-docker-image
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:1809 `
+    -s stefanscherer/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1607" `
-    -b mcr.microsoft.com/windows/nanoserver:sac2016
+    -b stefanscherer/nanoserver:sac2016
 
   Write-Host "Rebasing image to produce 1709 variant"
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:1809 `
+    -s stefanscherer/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1709" `
-    -b mcr.microsoft.com/windows/nanoserver:1709
+    -b stefanscherer/nanoserver:1709
 
   Write-Host "Rebasing image to produce 1803 variant"
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:1809 `
+    -s stefanscherer/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1803" `
-    -b mcr.microsoft.com/windows/nanoserver:1803
+    -b stefanscherer/nanoserver:1803
 
   Write-Host "Rebasing image to produce 1903 variant"
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
-    -s mcr.microsoft.com/windows/nanoserver:1809 `
+    -s stefanscherer/nanoserver:1809 `
     -t "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME-1903" `
-    -b mcr.microsoft.com/windows/nanoserver:1903
+    -b stefanscherer/nanoserver:1903
 
 } else {
   # Linux
