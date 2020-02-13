@@ -1,4 +1,4 @@
-ARG golang=golang:nanoserver
+ARG golang=golang:1.13-windowsservercore-1809
 ARG target=mcr.microsoft.com/windows/nanoserver:1809
 
 FROM $golang AS build
@@ -6,6 +6,7 @@ FROM $golang AS build
 COPY . /code
 WORKDIR /code
 
+RUN go get -d ./...
 RUN go build http.go
 
 FROM $target

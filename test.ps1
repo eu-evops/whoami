@@ -14,8 +14,8 @@ Write-Host Starting container
 docker run --name whoamitest -p 8080:8080 -d whoami
 Start-Sleep 10
 
-docker logs whoamitest
-
 $ErrorActionPreference = 'SilentlyContinue';
+
+docker logs whoamitest
 docker kill whoamitest
 docker rm -f whoamitest
