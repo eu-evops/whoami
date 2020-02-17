@@ -31,7 +31,9 @@ docker push "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME"
 if ($isWindows) {
   # Windows
   Write-Host "Rebasing image to produce 2016/1607 variant"
+  $ErrorActionPreference = 'SilentlyContinue';
   npm install -g rebase-docker-image
+  $ErrorActionPreference = 'Stop';
   rebase-docker-image `
     "$($image):$os-$env:ARCH-$env:APPVEYOR_REPO_TAG_NAME" `
     -s stefanscherer/nanoserver:1809 `
