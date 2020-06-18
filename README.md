@@ -1,6 +1,6 @@
 # whoami multi-arch image
 
-[![Build status](https://ci.appveyor.com/api/projects/status/bhma7tmx0eje73ao/branch/master?svg=true)](https://ci.appveyor.com/project/StefanScherer/whoami/branch/master)
+[![Build status](https://ci.appveyor.com/api/projects/status/bhma7tmx0eje73ao/branch/main?svg=true)](https://ci.appveyor.com/project/StefanScherer/whoami/branch/main)
 [![This image on DockerHub](https://img.shields.io/docker/pulls/stefanscherer/whoami.svg)](https://hub.docker.com/r/stefanscherer/whoami/)
 
 Simple HTTP docker service that prints it's container ID - for (almost) any Docker platform
@@ -65,7 +65,7 @@ Simple HTTP docker service that prints it's container ID - for (almost) any Dock
     I'm 736ab83847bb on windows/amd64
 
 Used for a first
-[swarm-mode demo](https://github.com/StefanScherer/docker-windows-box/tree/master/swarm-mode)
+[swarm-mode demo](https://github.com/StefanScherer/docker-windows-box/tree/main/swarm-mode)
 with Windows containers.
 
 ## Query all supported platforms
