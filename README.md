@@ -24,6 +24,10 @@ Simple HTTP docker service that prints it's container ID - for (almost) any Dock
       * windows/amd64 10.0.17763.x
     * Rebase this image to nanoserver:1903 SAC
       * windows/amd64 10.0.18362.x
+    * Rebase this image to nanoserver:1909 SAC
+      * windows/amd64 10.0.18363.x
+    * Rebase this image to nanoserver:2004 SAC
+      * windows/amd64 10.0.19041.x
   * Wait for all images to be on Docker Hub
   * Create and push the manifest list
     * preview of `docker manifest` command
