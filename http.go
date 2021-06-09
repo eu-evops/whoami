@@ -12,8 +12,8 @@ import (
 	"runtime"
 	"time"
 
-	"gopkg.in/sirupsen/logrus.v1"
-	"gopkg.in/spf13/viper.v1"
+	viper "github.com/spf13/viper"
+	logrus "gopkg.in/sirupsen/logrus.v1"
 )
 
 type DataResponse struct {
