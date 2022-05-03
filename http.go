@@ -63,6 +63,7 @@ func index(w http.ResponseWriter, req *http.Request) {
 	data := fetchData(req)
 	fmt.Fprintf(os.Stdout, "I'm %s\n", data.Hostname)
 	fmt.Fprintf(w, "I'm %s running on %s\n\n", data.Hostname, data.Platform)
+	fmt.Fprintln(w, "Remote Address", req.RemoteAddr)
 
 	for _, ip := range data.IP {
 		fmt.Fprintln(w, "IP:", ip)
@@ -71,6 +72,7 @@ func index(w http.ResponseWriter, req *http.Request) {
 	for _, env := range data.Environment {
 		fmt.Fprintln(w, "ENV:", env)
 	}
+
 	req.Write(w)
 }
 
